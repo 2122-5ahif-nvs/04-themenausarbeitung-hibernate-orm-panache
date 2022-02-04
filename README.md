@@ -3,7 +3,7 @@ Vinzent Kronreif
 
 # Documentation
 
-[Documentation for GitHub Packages](https://2122-5ahif-nvs.github.io/04-themenausarbeitung-hibernate-orm-panache/)
+[Documentation for Hibernate ORM with Panache](https://2122-5ahif-nvs.github.io/04-themenausarbeitung-hibernate-orm-panache/)
 
 # Slides 
 [Presentation Slides](https://vinzentkronreif.github.io/hibernate-orm-panache-demo)
