@@ -14,8 +14,81 @@ ifdef::backend-html5[]
 // print the toc here (not at the default position)
 //toc::[]
 
-== Header 1
+== Was ist Hibernate ORM
+* ORM = Object-relational mapping
+** Speichert Java Objekte in eine relationale Datenbank
+
+=== Hibernate ORM
+* Ist die am meisten verbreitetste JPA Implementierung
+* Erlaubt detailliertes konfigurierbares und komplexes OR-Mapping
+* Nicht wirklich einfach und trivial bei Standardfällen
+
+=== Panache
+
+Panache ist dafür da, um Entities und Zugriffe möglichst ohne Boilerplate-Code zu erstellen
+
+== Unterschied mit und ohne Panache
+=== Ohne Panache:
+
+* Felder sind private
+* Generierte Getter/Setter blasen den Code unnötig auf
+* Standard-Zugriffe werden immer wieder neu implementiert (z.B. Count)
+
+=== Mit Panache:
+
+* Felder sind public, ergo braucht man keine Getter/Setter
+
+Panache kann je nach Pattern über vordefinierte Methoden häufige Anwendungsfälle
+abdecken (z.B. count, find, list, ...). Entweder über ein Repository (DAO-Pattern)
+oder über das Entity selber (Active Record-Pattern) kann man auf diese Methoden zugreifen.
 
 
-=== Header 2
+== Patterns
+* Repository (DAO-Pattern)
+* Entity (Active Record-Pattern)
 
+=== Active Record Pattern
+
+Objekte(Entities) enthalten Daten(Fields) und Verhalten(Logik/Methoden)
+
+=== Umsetzung
+
+image::PanacheEntity.png[,400]
+
+* PanacheEntity vergibt eine Id, sonst kann man PanacheEntityBase benutzen,
+um eine eigene Id zu vergeben (z.B. anderer Datentyp)
+* Getter/Setter sind nicht nötig
+* @Transient benutzen, um Felder nicht zu persistieren
+
+=== DAO-Pattern (Repository)
+
+Entities erhalten Id über JPA-Annotation, Repositories enthalten
+Logik(vorimplementiere Methoden)
+
+=== Umsetzung
+
+image::PanacheRepository.png[]
+
+PanacheRepository<Entity> implementieren & @ApplicationScoped annotieren.
+
+Eigene Methoden werden als Instanzmethoden implementiert.
+
+=== Umsetzung
+
+Um das Repository zu nutzen -> Injecten mit @Inject
+
+== Anwendung mit REST
+
+Anwendung mit REST und DAO-Pattern(Repository)
+
+=== Injecten
+
+image::InjectRepo.png[]
+
+=== Simple Post
+
+image::Post.png[]
+
+=== Simple Get
+
+image::Get.png[]
